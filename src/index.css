@@ -42,3 +42,7 @@ body {
   border-radius: 3rem;
 }
 
+a{
+  color: var(--white) !important;
+  text-decoration: none !important;
+} 
