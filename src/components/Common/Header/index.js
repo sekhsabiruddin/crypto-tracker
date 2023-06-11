@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles.css'
+import TemporaryDrawer from './drawer'
 
 const Header = () => {
   return (
@@ -21,6 +22,9 @@ const Header = () => {
             <p className='link'>Dashboard</p>
         </a>
         
+      </div>
+      <div className='mobile-drawer'>
+        <TemporaryDrawer/>
       </div>
     </div>
   )
