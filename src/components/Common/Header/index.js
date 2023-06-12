@@ -1,6 +1,7 @@
 import React from 'react'
 import './styles.css'
 import TemporaryDrawer from './drawer'
+import Button from '../Button'
 
 const Header = () => {
   return (
@@ -18,10 +19,12 @@ const Header = () => {
         <a href='/'>
             <p className='link'>Watchlist</p>
         </a>
-        <a href='/'>
-            <p className='link'>Dashboard</p>
+        <a href='#'>
+          <Button 
+            text={"Dashboard"} 
+            onClick={()=>{console.log("btn was clicked")}}
+          />
         </a>
-        
       </div>
       <div className='mobile-drawer'>
         <TemporaryDrawer/>
