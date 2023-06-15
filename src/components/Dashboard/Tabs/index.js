@@ -43,7 +43,11 @@ export default function TabsComponent({coins}) {
             <div className='grid-flex'>
                 {coins.map((coin,i)=>{
                     return (
-                        <Grid coin={coin} key={i}/>
+                        <Grid 
+                          coin={coin} 
+                          key={i}
+                          delay={((i + 5) % 5) * 0.1}
+                        />
                     )
                 })}
             </div>
