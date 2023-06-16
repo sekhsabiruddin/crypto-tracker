@@ -23,7 +23,6 @@ const Header = () => {
         <Link to='/dashboard'>
           <Button 
             text={"Dashboard"} 
-            onClick={()=>{console.log("btn was clicked")}}
           />
         </Link>
       </div>
