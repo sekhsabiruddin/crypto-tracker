@@ -9,6 +9,8 @@ import { getCoinData } from '../functions/getCoinData';
 import { getCoinPrices } from '../functions/getCoinPrices';
 import LineChart from '../components/Coin/LineChart';
 import { convertDate } from '../functions/convertDate';
+import SelectDays from '../components/Coin/SelectDays';
+import { settingChartData } from '../functions/settingChartData';
 
 function CoinPage() {
     const {id} = useParams();
@@ -31,26 +33,24 @@ function CoinPage() {
             coinObject(setCoinData,data);
             const prices = await getCoinPrices(id,days);
             if(prices.length > 0){
-                console.log("prices get");
-                setChartData({
-                    labels : prices.map((price)=> convertDate(price[0])),
-                    datasets : [
-                        {
-                            data : prices.map((price)=>price[1]),
-                            borderColor : "#3a80e9",
-                            borderWidth : 2,
-                            fill : true,
-                            tension : 0.25,
-                            backgroundColor : "rgba(58,128,233,0.1)",
-                            pointRadius : 0
-                        }
-                    ]
-                })
+                // console.log("prices get");
+                settingChartData(setChartData,prices)
                 setIsLoading(false);
             }
         }
     }
 
+    const handleDaysChange = async (e) =>{
+        setIsLoading(true);
+        setDays(e.target.value);
+        const prices = await getCoinPrices(id,e.target.value);
+            if(prices.length > 0){
+                // console.log("prices get");
+                settingChartData(setChartData,prices)
+                setIsLoading(false);
+            }
+    }
+    console.log("Days ",days);
   return (
     <>
         <div>
@@ -58,10 +58,11 @@ function CoinPage() {
             {isLoading ? (<Loader/>)
                 :
                 (  <React.Fragment>
-                        <div className='grey-wrapper'>
+                        <div className='grey-wrapper' style={{padding:'0rem 1rem'}}>
                              <List coin={coinData}/>
                         </div>
                         <div className='grey-wrapper'>
+                            <SelectDays days={days} handleDaysChange={handleDaysChange}/>
                             <LineChart chartData={chartData}/>
                         </div>
                         <CoinInfo heading={coinData.name} desc={coinData.desc} />
