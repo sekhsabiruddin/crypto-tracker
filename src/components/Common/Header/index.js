@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
     <React.Fragment>
-      <ToastContainer/>
+      <ToastContainer  style={{width:'240px'}}/>
       <div className='navbar'>
         <h1 className='logo'>
           CryptoTracker<span style={{ color:'var(--blue)'}}>.</span>
