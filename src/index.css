@@ -80,3 +80,11 @@ img {
   border-radius: 0.8rem;
   padding: 1rem 1rem;
 }
+
+.coins-days-flex{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  margin: 1.5rem;
+}
