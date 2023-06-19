@@ -11,6 +11,7 @@ import LineChart from '../components/Coin/LineChart';
 import { convertDate } from '../functions/convertDate';
 import SelectDays from '../components/Coin/SelectDays';
 import { settingChartData } from '../functions/settingChartData';
+import PriceType from '../components/Coin/PriceType';
 
 function CoinPage() {
     const {id} = useParams();
@@ -18,6 +19,7 @@ function CoinPage() {
     const [coinData, setCoinData] = useState();
     const [days, setDays] = useState(30);
     const [chartData, setChartData] = useState({});
+    const [priceType, setPriceType] = useState("prices");
 
     useEffect(() => {
        if(id){
@@ -31,7 +33,7 @@ function CoinPage() {
         const data = await getCoinData(id);
         if(data){
             coinObject(setCoinData,data);
-            const prices = await getCoinPrices(id,days);
+            const prices = await getCoinPrices(id,days,priceType);
             if(prices.length > 0){
                 // console.log("prices get");
                 settingChartData(setChartData,prices)
@@ -43,14 +45,30 @@ function CoinPage() {
     const handleDaysChange = async (e) =>{
         setIsLoading(true);
         setDays(e.target.value);
-        const prices = await getCoinPrices(id,e.target.value);
+        const prices = await getCoinPrices(id,e.target.value,priceType);
             if(prices.length > 0){
                 // console.log("prices get");
                 settingChartData(setChartData,prices)
                 setIsLoading(false);
             }
     }
-    console.log("Days ",days);
+
+    const handlePriceTypeChange = async(event, newType) => {
+        setIsLoading(true);
+        setPriceType(newType);
+        let previousType = priceType
+        if(newType === null || priceType === null){
+            setPriceType(previousType);
+            newType = previousType;
+        }
+        const prices = await getCoinPrices(id,days,newType);
+            if(prices.length > 0){
+                // console.log("prices get");
+                settingChartData(setChartData,prices)
+                setIsLoading(false);
+            }
+    };
+
   return (
     <>
         <div>
@@ -63,7 +81,8 @@ function CoinPage() {
                         </div>
                         <div className='grey-wrapper'>
                             <SelectDays days={days} handleDaysChange={handleDaysChange}/>
-                            <LineChart chartData={chartData}/>
+                            <PriceType priceType={priceType} handlePriceTypeChange={handlePriceTypeChange}/>
+                            <LineChart chartData={chartData} priceType={priceType}/>
                         </div>
                         <CoinInfo heading={coinData.name} desc={coinData.desc} />
                     </React.Fragment>
