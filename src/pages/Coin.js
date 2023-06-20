@@ -36,7 +36,7 @@ function CoinPage() {
             const prices = await getCoinPrices(id,days,priceType);
             if(prices.length > 0){
                 // console.log("prices get");
-                settingChartData(setChartData,prices)
+                settingChartData(setChartData,prices,data)
                 setIsLoading(false);
             }
         }
@@ -48,7 +48,7 @@ function CoinPage() {
         const prices = await getCoinPrices(id,e.target.value,priceType);
             if(prices.length > 0){
                 // console.log("prices get");
-                settingChartData(setChartData,prices)
+                settingChartData(setChartData,prices,coinData)
                 setIsLoading(false);
             }
     }
@@ -82,7 +82,7 @@ function CoinPage() {
                         <div className='grey-wrapper'>
                             <SelectDays days={days} handleDaysChange={handleDaysChange}/>
                             <PriceType priceType={priceType} handlePriceTypeChange={handlePriceTypeChange}/>
-                            <LineChart chartData={chartData} priceType={priceType}/>
+                            <LineChart chartData={chartData} priceType={priceType} />
                         </div>
                         <CoinInfo heading={coinData.name} desc={coinData.desc} />
                     </React.Fragment>
