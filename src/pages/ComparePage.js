@@ -11,6 +11,7 @@ import List from '../components/Dashboard/List';
 import CoinInfo from '../components/Coin/CoinInfo';
 import LineChart from '../components/Coin/LineChart';
 import TogglePriceType from '../components/Coin/PriceType';
+import Footer from '../components/Common/Footer';
 
 function ComparePage() {
     const [crypto1, setCrypto1] = useState("bitcoin");
@@ -132,7 +133,7 @@ function ComparePage() {
                 </>
             )
         }
-        
+        <Footer/>
     </div>
   )
 }
