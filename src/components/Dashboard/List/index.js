@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './styles.css'
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
@@ -6,14 +6,23 @@ import { Tooltip } from '@mui/material';
 import { convertNumber } from '../../../functions/convertNumbers';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { IconButton } from '@mui/material';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
+import { hasBeenAdded } from '../../../functions/hasBeenAdded';
+import { removeFromWatchlist } from '../../../functions/removeFromWatchlist';
+import { addToWatchlist } from '../../../functions/addToWatchlist';
 
-function List({coin, delay}) {
+function List({coin, delay, isWatchlistPage}) {
+    const [added, setAdded] = useState(hasBeenAdded(coin.id));
+
   return (
     <Link to={`/coin/${coin.id}`}>
         <motion.tr className='list-row'
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: delay }}
+            style={{ display: isWatchlistPage && !added && "none" }}
         >
             <Tooltip title='Coin Logo'>
                 <td className='td-image'>
@@ -83,6 +92,34 @@ function List({coin, delay}) {
                         </p>
                     </td>
                 </Tooltip>
+                <td style={{ width: "fit-content" }}>
+                    <IconButton
+                        onClick={(e) => {
+                        e.preventDefault();
+                        if (added) {
+                            removeFromWatchlist(coin.id);
+                            setAdded(false);
+                        } else {
+                            addToWatchlist(coin.id);
+                            setAdded(true);
+                        }
+                        }}
+                    >
+                        {added ? (
+                        <StarRoundedIcon
+                            className={`watchlist-icon ${
+                            coin.price_change_percentage_24h < 0 && "watchlist-icon-red"
+                            } `}
+                        />
+                        ) : (
+                        <StarBorderRoundedIcon
+                            className={`watchlist-icon ${
+                            coin.price_change_percentage_24h < 0 && "watchlist-icon-red"
+                            } `}
+                        />
+                        )}
+                    </IconButton>
+                </td>
         </motion.tr>
     </Link>
   )

@@ -9,7 +9,7 @@ import './styles.css'
 import List from '../List';
 import Button from '../../Common/Button';
 
-export default function TabsComponent({coins, setSearch}) {
+export default function TabsComponent({coins, setSearch, isWatchlistPage}) {
   const [value, setValue] = useState('grid');
 
   const style = {
@@ -62,6 +62,7 @@ export default function TabsComponent({coins, setSearch}) {
                     coin={coin}
                     key={i}
                     delay={((i + 5) % 5) * 0.1}
+                    isWatchlistPage={isWatchlistPage}
                   />
                 ))
               )}
@@ -92,6 +93,7 @@ export default function TabsComponent({coins, setSearch}) {
                     coin={coin} 
                     key={i}
                     delay={(i % 10) * 0.1}
+                    isWatchlistPage={isWatchlistPage}
                   />
                 )
               )
