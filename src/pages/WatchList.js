@@ -4,17 +4,18 @@ import Header from "../components/Common/Header";
 import TabsComponent from "../components/Dashboard/Tabs";
 import Button from "../components/Common/Button";
 import Loader from "../components/Common/Loader";
+import { Link } from "react-router-dom";
 
 
 function WatchlistPage() {
     const coins = JSON.parse(localStorage.getItem("watchlist"));
-    console.log("watchlist page LS >>", coins);
+    // console.log("watchlist page LS >>", coins);
     const [myWatchlist, setMyWatchlist] = useState([]);
     const [loading, setLoading] = useState(false);
   
     useEffect(() => {
       getData();
-      console.log("setLoad ",loading);
+      // console.log("setLoad ",loading);
     }, []);
   
     const getData = async () => {
@@ -39,9 +40,9 @@ function WatchlistPage() {
                   No Items in the Watchlist
                 </h1>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <a href="/dashboard">
+                  <Link to="/dashboard">
                     <Button text={"Dashboard"} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             ) : (
