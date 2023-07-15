@@ -1,8 +1,8 @@
 import React from "react";
 import "./styles.css";
 import EmailIcon from "@mui/icons-material/Email";
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 function Footer() {
   function topFunction() {
@@ -15,13 +15,13 @@ function Footer() {
         CryptoTracker<span>.</span>
       </h2>
       <div className="social-links">
-        <a href="https://github.com/ImranShah1109">
+        <a href="https://github.com/sekhsabiruddin">
           <GitHubIcon className="social-link" />
         </a>
-        <a href="mailto:imranshaha41@gmail.com">
+        <a href="mailto:sksabiruddin@gmail.com">
           <EmailIcon className="social-link" />
         </a>
-        <a href="https://www.linkedin.com/in/imran-shaha-651904143/">
+        <a href="https://www.linkedin.com/in/sk-sabiruddin-406904217/">
           <LinkedInIcon className="social-link" />
         </a>
       </div>

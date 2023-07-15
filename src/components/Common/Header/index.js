@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import './styles.css'
-import TemporaryDrawer from './drawer'
-import Button from '../Button'
-import { Link } from 'react-router-dom'
-import { Switch } from '@mui/material'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useEffect, useState } from "react";
+import "./styles.css";
+import TemporaryDrawer from "./drawer";
+import Button from "../Button";
+import { Link } from "react-router-dom";
+import { Switch } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header = () => {
-
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") == "dark" ? true : false
+    localStorage.getItem("theme") === "dark" ? true : false
   );
 
   useEffect(() => {
-    if (localStorage.getItem("theme") == "dark") {
+    if (localStorage.getItem("theme") === "dark") {
       setDark();
     } else {
       setLight();
@@ -25,7 +24,7 @@ const Header = () => {
     setDarkMode(!darkMode);
     toast.success("Theme Changed !");
     const mode = localStorage.getItem("theme");
-    if (mode == "dark") {
+    if (mode === "dark") {
       setLight();
     } else {
       setDark();
@@ -44,39 +43,37 @@ const Header = () => {
 
   return (
     <React.Fragment>
-      <ToastContainer  style={{width:'240px'}}/>
-      <div className='navbar'>
-        <h1 className='logo'>
-          CryptoTracker<span style={{ color:'var(--blue)'}}>.</span>
+      <ToastContainer style={{ width: "240px" }} />
+      <div className="navbar">
+        <h1 className="logo">
+          CryptoTracker<span style={{ color: "var(--blue)" }}>.</span>
         </h1>
-        <div className='links'>
+        <div className="links">
           <Switch
-              checked={darkMode}
-              onClick={() => {
-                changeMode();
-              }}
+            checked={darkMode}
+            onClick={() => {
+              changeMode();
+            }}
           />
-          <Link to='/'>
-              <p className='link'>Home</p>
+          <Link to="/">
+            <p className="link">Home</p>
           </Link>
-          <Link to='/compare'>
-              <p className='link'>Compare</p>
+          <Link to="/compare">
+            <p className="link">Compare</p>
           </Link>
-          <Link to='/watchlist'>
-              <p className='link'>Watchlist</p>
+          <Link to="/watchlist">
+            <p className="link">Watchlist</p>
           </Link>
-          <Link to='/dashboard'>
-            <Button 
-              text={"Dashboard"} 
-            />
+          <Link to="/dashboard">
+            <Button text={"Dashboard"} />
           </Link>
         </div>
-        <div className='mobile-drawer'>
-          <TemporaryDrawer/>
+        <div className="mobile-drawer">
+          <TemporaryDrawer />
         </div>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

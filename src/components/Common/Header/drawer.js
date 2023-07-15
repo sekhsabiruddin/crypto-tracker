@@ -1,20 +1,19 @@
-import { useEffect, useState } from 'react';
-import Drawer from '@mui/material/Drawer';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import { IconButton, Switch } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { useEffect, useState } from "react";
+import Drawer from "@mui/material/Drawer";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import { IconButton, Switch } from "@mui/material";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") == "dark" ? true : false
+    localStorage.getItem("theme") === "dark" ? true : false
   );
 
   useEffect(() => {
-    if (localStorage.getItem("theme") == "dark") {
+    if (localStorage.getItem("theme") === "dark") {
       setDark();
     } else {
       setLight();
@@ -25,7 +24,7 @@ export default function TemporaryDrawer() {
     setDarkMode(!darkMode);
     toast.success("Theme Changed!");
     const mode = localStorage.getItem("theme");
-    if (mode == "dark") {
+    if (mode === "dark") {
       setLight();
     } else {
       setDark();
@@ -44,46 +43,40 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-      
-        <IconButton onClick={()=>setOpen(true)}>
-            <MenuRoundedIcon className='link'/>
-        </IconButton>
-        <Drawer
-        anchor="right"
-        open={open}
-        onClose={()=>setOpen(false)}
-        >
-        <div className='drawer-div'>
-            <Link to='/'>
-                <p className='link'>Home</p>
-            </Link>
-            <Link to='/compare'>
-                <p className='link'>Compare</p>
-            </Link>
-            <Link to='/watchlist'>
-                <p className='link'>Watchlist</p>
-            </Link>
-            <Link to='/dashboard'>
-                <p className='link'>Dashboard</p>
-            </Link>
-            <div
-                style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                }}
-            >
-                <p className="link">{darkMode ? "Light Mode" : "Dark Mode"}</p>
-                <Switch
-                checked={darkMode}
-                onClick={() => {
-                    changeMode();
-                }}
-                />
-            </div>
+      <IconButton onClick={() => setOpen(true)}>
+        <MenuRoundedIcon className="link" />
+      </IconButton>
+      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+        <div className="drawer-div">
+          <Link to="/">
+            <p className="link">Home</p>
+          </Link>
+          <Link to="/compare">
+            <p className="link">Compare</p>
+          </Link>
+          <Link to="/watchlist">
+            <p className="link">Watchlist</p>
+          </Link>
+          <Link to="/dashboard">
+            <p className="link">Dashboard</p>
+          </Link>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+          >
+            <p className="link">{darkMode ? "Light Mode" : "Dark Mode"}</p>
+            <Switch
+              checked={darkMode}
+              onClick={() => {
+                changeMode();
+              }}
+            />
+          </div>
         </div>
-        </Drawer>
-
+      </Drawer>
     </div>
   );
 }
